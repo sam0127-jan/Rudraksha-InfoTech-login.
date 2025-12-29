@@ -8,71 +8,80 @@ import { fileURLToPath } from "url";
 dotenv.config();
 const app = express();
 
-// ✅ Fix __dirname for ES Modules
+// Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Middleware
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// ✅ Serve static frontend files
 app.use(express.static(path.join(__dirname, "public")));
 
-// ✅ MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.error("❌ DB Error:", err));
+  .catch(err => console.error("❌ Mongo Error:", err));
 
-// ✅ User Schema
+// User Schema
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  domain: { type: String, required: true }
 });
+
 const User = mongoose.model("User", userSchema);
 
-// ✅ Default Route → signup.html
+// Default Route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "signup.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// ✅ Signup Route
+// Signup
 app.post("/signup", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, domain } = req.body;
+
   try {
-    const existingUser = await User.findOne({ username });
-    if (existingUser) return res.send("⚠️ Username already exists.");
+    const userExists = await User.findOne({ username });
+    if (userExists) return res.send("⚠️ Username already exists");
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
 
-    // Redirect to signin page after signup
+    const user = new User({
+      username,
+      password: hashedPassword,
+      domain
+    });
+
+    await user.save();
     res.redirect("/signin.html");
   } catch (err) {
-    console.error("Signup Error:", err);
-    res.status(500).send("❌ Error during signup.");
+    console.error(err);
+    res.status(500).send("❌ Signup Error");
   }
 });
 
-// ✅ Signin Route
+// Signin
 app.post("/signin", async (req, res) => {
   const { username, password } = req.body;
+
   try {
     const user = await User.findOne({ username });
-    if (!user) return res.send("❌ User not found.");
+    if (!user) return res.send("❌ User not found");
 
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) return res.send("⚠️ Invalid password.");
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.send("⚠️ Invalid Password");
 
-    // ✅ Redirect to your Vercel frontend after successful signin
+    console.log("Logged in user domain:", user.domain);
+
     res.redirect("https://ocl-vwir.vercel.app/");
   } catch (err) {
-    console.error("Signin Error:", err);
-    res.status(500).send("❌ Error during signin.");
+    res.status(500).send("❌ Login Error");
   }
 });
 
-// ✅ Start Server
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Start Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
+);
