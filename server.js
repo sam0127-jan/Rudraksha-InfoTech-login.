@@ -75,11 +75,11 @@ app.post("/signin", async (req, res) => {
     console.log("Logged in user domain:", user.domain);
 
     // ✅ DOMAIN BASED REDIRECT
-    if (user.domain === "App Development (Flutter)") {
-      return res.redirect("https://ocl-vwir.vercel.app/");
+    if (user.domain === "app") {
+      return res.redirect("https://ocl-nine.vercel.app/");
     }
 
-    if (user.domain === "Web Development (HTML, CSS, JavaScript)") {
+    if (user.domain === "web") {
       return res.redirect("https://ocl-vwir.vercel.app/");
     }
 
@@ -87,7 +87,7 @@ app.post("/signin", async (req, res) => {
       return res.redirect("https://python-programming-intership-py.vercel.app/");
     }
 
-    if (user.domain === "Resume Building & Soft Skills Development") {
+    if (user.domain === "soft") {
       return res.redirect(
         "https://sites.google.com/view/app-development-intership-code/home"
       );
@@ -107,4 +107,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
+
 
