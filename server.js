@@ -74,15 +74,37 @@ app.post("/signin", async (req, res) => {
 
     console.log("Logged in user domain:", user.domain);
 
-    // Successful login redirect
-    res.redirect("https://ocl-vwir.vercel.app/");
+    // ✅ DOMAIN BASED REDIRECT
+    if (user.domain === "App Development (Flutter)") {
+      return res.redirect("https://ocl-vwir.vercel.app/");
+    }
+
+    if (user.domain === "Web Development (HTML, CSS, JavaScript)") {
+      return res.redirect("https://ocl-vwir.vercel.app/");
+    }
+
+    if (user.domain === "Python with Database") {
+      return res.redirect("https://python-programming-intership-py.vercel.app/");
+    }
+
+    if (user.domain === "Resume Building & Soft Skills Development") {
+      return res.redirect(
+        "https://sites.google.com/view/app-development-intership-code/home"
+      );
+    }
+
+    return res.send("❌ Domain not recognized");
+
   } catch (err) {
+    console.error(err);
     res.status(500).send("❌ Login Error");
   }
 });
+
 
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
+
