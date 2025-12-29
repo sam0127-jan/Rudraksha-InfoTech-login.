@@ -2,33 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rudraksha InfoTech | Signup</title>
+  <title>Rudraksh InfoTech | Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-    body{
-      height:100vh;display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,#0078ff,#00c6ff)
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-    .signup-container{
-      background:#fff;width:380px;padding:40px;border-radius:20px;
-      box-shadow:0 10px 25px rgba(0,0,0,.2);text-align:center
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    input,select{
-      width:100%;padding:12px;margin:10px 0;
-      border-radius:10px;border:1.5px solid #ccc
+
+    .signup-container {
+      background: #ffffff;
+      width: 400px;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      animation: fadeIn 0.9s ease-in-out;
     }
-    button{
-      width:100%;padding:12px;border:none;border-radius:10px;
-      background:linear-gradient(135deg,#0078ff,#00c6ff);
-      color:#fff;font-size:16px;cursor:pointer
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .company-name {
+      font-size: 26px;
+      font-weight: 600;
+      color: #203a43;
+      margin-bottom: 5px;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #203a43;
+      box-shadow: 0 0 6px rgba(32, 58, 67, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #203a43, #2c5364);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #1b2f38, #243f4f);
+      transform: translateY(-2px);
+    }
+
+    .signin-link {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .signin-link a {
+      color: #203a43;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signin-link a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #999;
     }
   </style>
 </head>
 
 <body>
+
   <div class="signup-container">
-    <h2>Join Rudraksha InfoTech</h2>
+    <div class="company-name">Rudraksh InfoTech</div>
+    <div class="tagline">Internship & Skill Development Platform</div>
 
     <form action="/signup" method="POST" onsubmit="setRedirectLink()">
       <input type="text" name="username" placeholder="Username" required>
@@ -37,18 +129,24 @@
       <select name="domain" id="domain" required>
         <option value="">Select Internship Domain</option>
         <option value="app">App Development (Flutter)</option>
-        <option value="web">Web Development (HTML, CSS, JS)</option>
+        <option value="web">Web Development (HTML, CSS, JavaScript)</option>
         <option value="python">Python with Database</option>
-        <option value="soft">Resume Building & Soft Skills</option>
+        <option value="soft">Resume Building & Soft Skills Development</option>
       </select>
 
-      <!-- 🔹 Hidden redirect URL -->
+      <!-- Hidden redirect URL -->
       <input type="hidden" name="redirectUrl" id="redirectUrl">
 
       <button type="submit">Create Account</button>
     </form>
 
-    <p>Already registered? <a href="/signin.html">Sign in</a></p>
+    <div class="signin-link">
+      Already registered? <a href="/signin.html">Sign in</a>
+    </div>
+
+    <div class="footer-text">
+      © 2025 Rudraksh InfoTech. All rights reserved.
+    </div>
   </div>
 
   <script>
@@ -56,7 +154,7 @@
       const domain = document.getElementById("domain").value;
       const redirect = document.getElementById("redirectUrl");
 
-      if (domain === "app") {
+      if (domain === "app" || domain === "web") {
         redirect.value = "https://ocl-vwir.vercel.app/";
       } 
       else if (domain === "python") {
@@ -64,11 +162,9 @@
       } 
       else if (domain === "soft") {
         redirect.value = "https://sites.google.com/view/app-development-intership-code/home";
-      } 
-      else {
-        redirect.value = "https://ocl-vwir.vercel.app/";
       }
     }
   </script>
+
 </body>
 </html>
