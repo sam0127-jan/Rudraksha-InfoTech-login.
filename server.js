@@ -32,9 +32,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// Default Route
+// ✅ FIXED Default Route (signin.html as homepage)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "signin.html"));
 });
 
 // Signup
@@ -74,6 +74,7 @@ app.post("/signin", async (req, res) => {
 
     console.log("Logged in user domain:", user.domain);
 
+    // Successful login redirect
     res.redirect("https://ocl-vwir.vercel.app/");
   } catch (err) {
     res.status(500).send("❌ Login Error");
