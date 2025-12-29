@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Rudraksha InfoTech | Signup</title>
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
     body{
@@ -24,26 +25,50 @@
     }
   </style>
 </head>
+
 <body>
   <div class="signup-container">
     <h2>Join Rudraksha InfoTech</h2>
 
-    <form action="/signup" method="POST">
+    <form action="/signup" method="POST" onsubmit="setRedirectLink()">
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
 
-      <select name="domain" required>
+      <select name="domain" id="domain" required>
         <option value="">Select Internship Domain</option>
-        <option>App Development (Flutter)</option>
-        <option>Web Development (HTML, CSS, JavaScript)</option>
-        <option>Python with Database</option>
-        <option>Resume Building & Soft Skills Development</option>
+        <option value="app">App Development (Flutter)</option>
+        <option value="web">Web Development (HTML, CSS, JS)</option>
+        <option value="python">Python with Database</option>
+        <option value="soft">Resume Building & Soft Skills</option>
       </select>
+
+      <!-- 🔹 Hidden redirect URL -->
+      <input type="hidden" name="redirectUrl" id="redirectUrl">
 
       <button type="submit">Create Account</button>
     </form>
 
     <p>Already registered? <a href="/signin.html">Sign in</a></p>
   </div>
+
+  <script>
+    function setRedirectLink() {
+      const domain = document.getElementById("domain").value;
+      const redirect = document.getElementById("redirectUrl");
+
+      if (domain === "app") {
+        redirect.value = "https://ocl-vwir.vercel.app/";
+      } 
+      else if (domain === "python") {
+        redirect.value = "https://python-programming-intership-py.vercel.app/";
+      } 
+      else if (domain === "soft") {
+        redirect.value = "https://sites.google.com/view/app-development-intership-code/home";
+      } 
+      else {
+        redirect.value = "https://ocl-vwir.vercel.app/";
+      }
+    }
+  </script>
 </body>
 </html>
