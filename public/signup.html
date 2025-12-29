@@ -2,117 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rudraksha InfoTech | Signup</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+    body{
+      height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#0078ff,#00c6ff)
     }
-
-    body {
-      background: linear-gradient(135deg, #0078ff, #00c6ff);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .signup-container{
+      background:#fff;width:380px;padding:40px;border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.2);text-align:center
     }
-
-    .signup-container {
-      background: #fff;
-      width: 380px;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      animation: fadeIn 1s ease;
+    input,select{
+      width:100%;padding:12px;margin:10px 0;
+      border-radius:10px;border:1.5px solid #ccc
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .signup-container h1 {
-      font-weight: 600;
-      color: #0078ff;
-      margin-bottom: 10px;
-    }
-
-    .signup-container p {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 30px;
-    }
-
-    .signup-container input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      transition: 0.3s;
-    }
-
-    .signup-container input:focus {
-      border-color: #0078ff;
-      outline: none;
-      box-shadow: 0 0 5px rgba(0,120,255,0.3);
-    }
-
-    .signup-container button {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #0078ff, #00c6ff);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .signup-container button:hover {
-      background: linear-gradient(135deg, #0063cc, #00aaff);
-      transform: translateY(-2px);
-    }
-
-    .signup-container a {
-      color: #0078ff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .signup-container a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      margin-top: 25px;
-      font-size: 13px;
-      color: #999;
+    button{
+      width:100%;padding:12px;border:none;border-radius:10px;
+      background:linear-gradient(135deg,#0078ff,#00c6ff);
+      color:#fff;font-size:16px;cursor:pointer
     }
   </style>
 </head>
 <body>
   <div class="signup-container">
-    <h1>Join Rudraksha InfoTech </h1>
-    <p>Start your internship journey with us 🚀</p>
+    <h2>Join Rudraksha InfoTech</h2>
 
     <form action="/signup" method="POST">
-      <input type="text" name="username" placeholder="Enter Username" required>
-      <input type="password" name="password" placeholder="Enter Password" required>
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <select name="domain" required>
+        <option value="">Select Internship Domain</option>
+        <option>App Development (Flutter)</option>
+        <option>Web Development (HTML, CSS, JavaScript)</option>
+        <option>Python with Database</option>
+        <option>Resume Building & Soft Skills Development</option>
+      </select>
+
       <button type="submit">Create Account</button>
     </form>
 
-    <div class="footer">
-      Already have an account? <a href="/signin.html">Sign in here</a>
-    </div>
+    <p>Already registered? <a href="/signin.html">Sign in</a></p>
   </div>
 </body>
 </html>
-
