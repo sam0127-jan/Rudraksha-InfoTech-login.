@@ -80,7 +80,7 @@ app.post("/signin", async (req, res) => {
     }
 
     if (user.domain === "web") {
-      return res.redirect("https://ri-web-sage.vercel.app/");
+      return res.redirect("https://ri-web-intern.vercel.app/");
     }
 
     if (user.domain === "Python with Database") {
@@ -107,6 +107,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
+
 
 
 
